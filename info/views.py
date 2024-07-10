@@ -23,7 +23,7 @@ def handleStudent(request):
                 student=Student.objects.filter(id=id).first()
                 if student is None:
                     return JsonResponse({
-                        'message':'student does not exists with id'
+                        'message':f'student does not exists with id {id}'
                     })
             student = Student()
             student.name=name
@@ -32,7 +32,7 @@ def handleStudent(request):
             student.save()
 
             return JsonResponse({
-                'message':'updated successful !!!'
+                'message':'Updated successful !!!'
             })
         
         student=Student()
@@ -43,10 +43,10 @@ def handleStudent(request):
 
 
         return JsonResponse({
-            'message':'New record created successful !!'
+            'message':'New record created successfully !!'
         })
     return JsonResponse({
-        'message':'name, address or division are required'
+        'message':'name, address and division are required '
     })
 
 
@@ -72,14 +72,14 @@ def handleTeacher(request):
 
                     if teacher is None:
                         return JsonResponse({
-                            'message': 'Teacher does not exist'
+                            'message': 'Teacher does not exist !!'
                         })
                     
                     teacher.deleted = False
                     teacher.save()
 
                     return JsonResponse({
-                        'message': 'Teacher restored'
+                        'message': 'Teacher is restored !'
                     })
 
                 teacher = Teacher.objects.filter(pk=id).first()
@@ -94,7 +94,7 @@ def handleTeacher(request):
                 teacher.save()
 
                 return JsonResponse({
-                    'message':'Teacher edited successfully !!'
+                    'message':'Teacher updated successfully !!'
                 })
 
             teacher = Teacher()
@@ -103,7 +103,7 @@ def handleTeacher(request):
             teacher.save()
             
             return JsonResponse({
-                'message':'Teacher saved successful !!'
+                'message':'Teacher is saved successfully !!'
             })
 
 
@@ -111,21 +111,21 @@ def handleTeacher(request):
         id = request.GET.get('id')
         if id is None:
             return JsonResponse({
-                'message':'Required ID'
+                'message':'Required ID to delete'
             })     
             
         teacher=Teacher.objects.filter(id=id).first()
 
         if teacher is None:
             return JsonResponse({
-                'message':f'teacher does not exists with id {id}'  #f=FORMAT
+                'message':f'Teacher does not exists with id {id}'  #f=FORMAT
             })
             
         teacher.deleted = True
         teacher.save()
 
         return JsonResponse({
-            'message':'Teacher is deleted'
+            'message':'Teacher is deleted successfully !'
         }) 
     
 
@@ -149,7 +149,7 @@ def handleClassroom(request):
                 classRoom.save()
 
                 return JsonResponse({
-                    'message':'class room saved successfully' 
+                    'message':'Class room is saved successfully !!' 
                 })
             
             classRoom=ClassRoom.objects.filter(id=id).first()
@@ -160,7 +160,7 @@ def handleClassroom(request):
                 classRoom.save()
 
                 return JsonResponse({
-                    'message':'class room edited succesfully'
+                    'message':'Class room is edited succesfully !!'
                 })
             return JsonResponse({
                 'message': f'Classroom does not exists with id {id}'
